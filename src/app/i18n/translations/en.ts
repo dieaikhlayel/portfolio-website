@@ -14,7 +14,7 @@ export const en = {
   },
   home: {
     photo: {
-      alt: 'AI-generated illustration of Diea Ikhlayel working at a laptop',
+      alt: 'AI-generated portrait of Diea Ikhlayel',
     },
     hero: {
       role: 'Full-stack web developer with IT support and cybersecurity skills',

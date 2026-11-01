@@ -1,15 +1,15 @@
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
-  gap: var(--space-7);
+  grid-template-columns: minmax(0, 40rem) minmax(0, 22rem);
+  justify-content: space-between;
+  gap: var(--space-8);
   align-items: center;
-  padding-block: var(--space-8) var(--space-9);
+  padding-block: var(--space-7) var(--space-8);
 }
 
 .hero__content {
   display: grid;
   gap: var(--space-5);
-  max-inline-size: 40rem;
 }
 
 .hero__name {
@@ -50,11 +50,10 @@
   border-radius: var(--radius-lg);
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 56rem) {
   .hero {
     grid-template-columns: 1fr;
     gap: var(--space-6);
-    padding-block: var(--space-7) var(--space-8);
   }
 
   .hero__figure {

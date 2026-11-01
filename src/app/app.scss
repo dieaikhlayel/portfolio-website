@@ -19,8 +19,9 @@
   }
 }
 
+// The page body is a .container: its width and side margins come from that class.
+// Do not set inline-size here, it would stretch the content to the edges of the window.
 main {
   flex: 1;
-  inline-size: 100%;
   padding-block: var(--space-8);
 }
