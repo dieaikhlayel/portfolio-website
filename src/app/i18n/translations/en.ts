@@ -13,6 +13,9 @@ export const en = {
     name: 'Diea Ikhlayel',
   },
   home: {
+    photo: {
+      alt: 'AI-generated illustration of Diea Ikhlayel working at a laptop',
+    },
     hero: {
       role: 'Full-stack web developer with IT support and cybersecurity skills',
       intro:
@@ -34,10 +37,6 @@ export const en = {
     },
   },
   about: {
-    photo: {
-      alt: 'AI-generated illustration of Diea Ikhlayel working at a laptop',
-      caption: 'AI-generated image',
-    },
     sections: {
       education: 'Education',
       experience: 'Experience',

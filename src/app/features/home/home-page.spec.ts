@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { App } from '../../app';
@@ -50,5 +51,36 @@ describe('HomePage hero', () => {
   it('has exactly one h1', async () => {
     const main = await render('/en');
     expect(main.querySelectorAll('h1').length).toBe(1);
+  });
+
+  describe('photo', () => {
+    it('has a description that says the image is AI-generated, in English and in Arabic', async () => {
+      const english = await render('/en');
+      expect(english.querySelector('.hero__photo')?.getAttribute('alt')).toBe(en.home.photo.alt);
+      expect(en.home.photo.alt.toLowerCase()).toContain('ai-generated');
+      const arabic = await render('/ar');
+      expect(arabic.querySelector('.hero__photo')?.getAttribute('alt')).toBe(ar.home.photo.alt);
+    });
+
+    it('has no visible caption under it', async () => {
+      const main = await render('/en');
+      expect(main.querySelector('.hero__figure figcaption')).toBeNull();
+    });
+
+    it('points only at image files that exist, and gives the browser the size to avoid page jumps', async () => {
+      const main = await render('/en');
+      const img = main.querySelector('.hero__photo')!;
+      expect(img.getAttribute('width')).toBe('960');
+      expect(img.getAttribute('height')).toBe('960');
+      const srcset = main.querySelector('.hero__figure source')!.getAttribute('srcset')!;
+      const files = [
+        img.getAttribute('src')!,
+        ...srcset.split(',').map((s) => s.trim().split(' ')[0]),
+      ];
+      expect(files.length).toBe(3);
+      for (const file of files) {
+        expect(existsSync(`public/${file}`), file).toBe(true);
+      }
+    });
   });
 });

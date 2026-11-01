@@ -14,6 +14,9 @@ export const ar: Translations = {
     name: 'ضياء إخليل',
   },
   home: {
+    photo: {
+      alt: 'رسم مولَّد بالذكاء الاصطناعي لضياء إخليل وهو يعمل على حاسوب محمول',
+    },
     hero: {
       role: 'مطوّر ويب متكامل | دعم فني | أمن سيبراني',
       intro:
@@ -35,10 +38,6 @@ export const ar: Translations = {
     },
   },
   about: {
-    photo: {
-      alt: 'رسم مولَّد بالذكاء الاصطناعي لضياء إخليل وهو يعمل على حاسوب محمول',
-      caption: 'صورة مولَّدة بالذكاء الاصطناعي',
-    },
     sections: {
       education: 'التعليم',
       experience: 'الخبرات',

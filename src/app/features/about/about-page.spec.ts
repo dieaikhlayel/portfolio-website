@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { App } from '../../app';
@@ -79,37 +78,5 @@ describe('AboutPage', () => {
     const el = await render('/en/about');
     expect(el.innerHTML).not.toContain('tel:');
     expect(el.textContent).not.toMatch(/\+?\d[\d\s-]{7,}/);
-  });
-
-  describe('photo', () => {
-    it('says in English that the image is AI-generated, in both the description and the caption', async () => {
-      const el = await render('/en/about');
-      expect(el.querySelector('img')?.getAttribute('alt')).toBe(en.about.photo.alt);
-      expect(en.about.photo.alt.toLowerCase()).toContain('ai-generated');
-      expect(el.querySelector('figcaption')?.textContent?.trim()).toBe(en.about.photo.caption);
-      expect(en.about.photo.caption.toLowerCase()).toContain('ai-generated');
-    });
-
-    it('has the Arabic description and caption on the Arabic page', async () => {
-      const el = await render('/ar/about');
-      expect(el.querySelector('img')?.getAttribute('alt')).toBe(ar.about.photo.alt);
-      expect(el.querySelector('figcaption')?.textContent?.trim()).toBe(ar.about.photo.caption);
-    });
-
-    it('points only at image files that exist, and gives the browser the size to avoid page jumps', async () => {
-      const el = await render('/en/about');
-      const img = el.querySelector('img')!;
-      expect(img.getAttribute('width')).toBe('960');
-      expect(img.getAttribute('height')).toBe('960');
-      const srcset = el.querySelector('source')!.getAttribute('srcset')!;
-      const files = [
-        img.getAttribute('src')!,
-        ...srcset.split(',').map((s) => s.trim().split(' ')[0]),
-      ];
-      expect(files.length).toBe(3);
-      for (const file of files) {
-        expect(existsSync(`public/${file}`), file).toBe(true);
-      }
-    });
   });
 });

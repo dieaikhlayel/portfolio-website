@@ -1,25 +1,5 @@
 <article class="about">
-  <header class="about__header">
-    <h1 class="about__title">{{ i18n.t().nav.about }}</h1>
-    <figure class="about__figure">
-      <picture>
-        <source
-          type="image/webp"
-          srcset="images/diea-working-480.webp 480w, images/diea-working-960.webp 960w"
-          sizes="(min-width: 40rem) 20rem, 100vw"
-        />
-        <img
-          class="about__photo"
-          src="images/diea-working-960.jpg"
-          width="960"
-          height="960"
-          decoding="async"
-          [alt]="i18n.t().about.photo.alt"
-        />
-      </picture>
-      <figcaption class="about__caption">{{ i18n.t().about.photo.caption }}</figcaption>
-    </figure>
-  </header>
+  <h1 class="about__title">{{ i18n.t().nav.about }}</h1>
 
   @for (section of sections; track section.id) {
     <section class="about__section" [attr.aria-labelledby]="'about-' + section.id">
