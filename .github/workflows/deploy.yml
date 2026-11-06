@@ -1,0 +1,61 @@
+# Publishes the site to GitHub Pages.
+# It runs ONLY when you start it by hand (Actions tab > "Deploy to GitHub Pages" > Run workflow).
+# Pushing code never publishes anything.
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npx ng test --no-watch
+
+      # The release build: base path /portfolio-website/, sitemap, 404 page, no "noindex".
+      - run: npm run build:release
+
+      - name: Check the release build before publishing it
+        run: |
+          out=dist/portfolio-v2/browser
+          grep -q '<base href="/portfolio-website/">' "$out/en/index.html"
+          grep -q '<base href="/portfolio-website/">' "$out/ar/index.html"
+          test -f "$out/404.html"
+          test -f "$out/sitemap.xml"
+          grep -q 'https://dieaikhlayel.github.io/portfolio-website/en/' "$out/sitemap.xml"
+          if grep -rq 'name="robots"' "$out/en" "$out/ar" "$out/index.html"; then
+            echo "A noindex tag is present: this looks like the preview build, not the release build."
+            exit 1
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/portfolio-v2/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
