@@ -5,11 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:preview": "ng build --base-href /portfolio-v2/ && node scripts/seo-files.mjs --site https://dieaikhlayel.github.io/portfolio-v2/ --noindex",
+    "build:preview": "ng build --base-href /portfolio-v2/ && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seo-files.mjs --site https://dieaikhlayel.github.io/portfolio-v2/ --noindex",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "build:release": "ng build --base-href /portfolio-website/ && node scripts/seo-files.mjs --site https://dieaikhlayel.github.io/portfolio-website/ --index"
+    "build:release": "ng build --base-href /portfolio-website/ && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seo-files.mjs --site https://dieaikhlayel.github.io/portfolio-website/ --index"
   },
   "private": true,
   "packageManager": "npm@11.19.1",

@@ -17,6 +17,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { join } from 'node:path';
+import { decodeEntities, socialTags } from '../src/app/core/seo/social-tags.ts';
 
 const args = process.argv.slice(2);
 const option = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);
@@ -102,5 +103,29 @@ if (wantNoindex) {
     '',
   ].join('\n');
   writeFileSync(join(outDir, 'sitemap.xml'), xml);
-  console.log(`seo-files: 404.html and sitemap.xml created (${entries.length} addresses)`);
+
+  // 3. Link previews: the main address, language links, and the Open Graph and Twitter card tags.
+  let tagged = 0;
+  for (const lang of LANGS) {
+    for (const page of pages) {
+      const pageFile = join(outDir, lang, page, 'index.html');
+      const html = readFileSync(pageFile, 'utf8');
+      if (html.includes('property="og:title"')) continue;
+      const title = html.match(/<title>([^<]*)<\/title>/)?.[1];
+      const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1];
+      if (!title || !description) fail(`no title or description found in ${pageFile}`);
+      const tags = socialTags({
+        site,
+        lang,
+        page,
+        title: decodeEntities(title),
+        description: decodeEntities(description),
+      });
+      writeFileSync(pageFile, html.replace('</head>', `${tags}\n</head>`));
+      tagged++;
+    }
+  }
+  console.log(
+    `seo-files: 404.html and sitemap.xml created (${entries.length} addresses), preview tags added to ${tagged} page(s)`,
+  );
 }

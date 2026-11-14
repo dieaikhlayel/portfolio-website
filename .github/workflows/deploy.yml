@@ -41,6 +41,9 @@ jobs:
           test -f "$out/404.html"
           test -f "$out/sitemap.xml"
           grep -q 'https://dieaikhlayel.github.io/portfolio-website/en/' "$out/sitemap.xml"
+          test -f "$out/images/og-card.png"
+          grep -q 'property="og:image" content="https://dieaikhlayel.github.io/portfolio-website/images/og-card.png"' "$out/en/index.html"
+          grep -q 'rel="canonical" href="https://dieaikhlayel.github.io/portfolio-website/ar/about/"' "$out/ar/about/index.html"
           if grep -rq 'name="robots"' "$out/en" "$out/ar" "$out/index.html"; then
             echo "A noindex tag is present: this looks like the preview build, not the release build."
             exit 1
