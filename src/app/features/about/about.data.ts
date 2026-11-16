@@ -29,6 +29,17 @@ export const EDUCATION: readonly AboutEntry[] = [
 
 export const EXPERIENCE: readonly AboutEntry[] = [
   {
+    title: {
+      en: 'Administrative Data Entry Assistant (Temporary)',
+      ar: 'مساعد إدخال بيانات إداري (مؤقت)',
+    },
+    org: {
+      en: 'Directorate of Education, North Hebron (Halhul)',
+      ar: 'مديرية التربية والتعليم شمال الخليل (حلحول)',
+    },
+    period: { en: 'Nov 2026 – Present', ar: 'تشرين الثاني 2026 – الآن' },
+  },
+  {
     title: { en: 'Frontend Developer', ar: 'مطوّر واجهات أمامية' },
     org: {
       en: 'Hebron University: “Empowering Journalists to Preserve Palestinian Heritage” project',
