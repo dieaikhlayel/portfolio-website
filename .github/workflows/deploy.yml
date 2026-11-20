@@ -40,6 +40,7 @@ jobs:
           grep -q '<base href="/portfolio-website/">' "$out/ar/index.html"
           test -f "$out/404.html"
           test -f "$out/sitemap.xml"
+          test -f "$out/cv/Diea_Ikhlayel_CV.pdf"
           grep -q 'https://dieaikhlayel.github.io/portfolio-website/en/' "$out/sitemap.xml"
           test -f "$out/images/og-card.png"
           grep -q 'property="og:image" content="https://dieaikhlayel.github.io/portfolio-website/images/og-card.png"' "$out/en/index.html"

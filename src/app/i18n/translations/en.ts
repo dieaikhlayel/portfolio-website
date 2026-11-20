@@ -64,6 +64,9 @@ export const en = {
     live: 'Live demo',
     note: 'Note',
   },
+  cv: {
+    download: 'Download CV (PDF, English)',
+  },
   theme: {
     label: 'Theme',
     options: {

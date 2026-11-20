@@ -64,6 +64,9 @@ export const ar: Translations = {
     live: 'نسخة تجريبية مباشرة',
     note: 'ملاحظة',
   },
+  cv: {
+    download: 'تحميل السيرة الذاتية (PDF، بالإنجليزية)',
+  },
   theme: {
     label: 'المظهر',
     options: {

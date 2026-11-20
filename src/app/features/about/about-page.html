@@ -1,6 +1,18 @@
 <article class="about">
   <h1 class="about__title">{{ i18n.t().nav.about }}</h1>
 
+  <p class="about__cv">
+    <a
+      class="btn btn--secondary"
+      href="cv/Diea_Ikhlayel_CV.pdf"
+      download="Diea_Ikhlayel_CV.pdf"
+      type="application/pdf"
+      hreflang="en"
+    >
+      {{ i18n.t().cv.download }}
+    </a>
+  </p>
+
   @for (section of sections; track section.id) {
     <section class="about__section" [attr.aria-labelledby]="'about-' + section.id">
       <h2 class="about__heading" [id]="'about-' + section.id">
